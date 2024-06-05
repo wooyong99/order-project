@@ -29,7 +29,7 @@ dependencies {
 	runtimeOnly 'org.mariadb.jdbc:mariadb-java-client'
 
 	// H2
-	testImplementation 'com.h2database:h2'
+	implementation "com.h2database:h2"
 }
 
 task copyPrivate(type: Copy) {
