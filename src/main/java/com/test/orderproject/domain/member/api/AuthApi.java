@@ -1,7 +1,6 @@
 package com.test.orderproject.domain.member.api;
 
-import com.test.orderproject.domain.member.dao.UserDao;
-import com.test.orderproject.domain.member.domain.User;
+import com.test.orderproject.domain.member.application.AuthService;
 import com.test.orderproject.domain.member.dto.LoginRequest;
 import com.test.orderproject.domain.member.dto.SignUpRequest;
 import lombok.RequiredArgsConstructor;
@@ -16,22 +15,21 @@ import org.springframework.web.bind.annotation.RestController;
 @RequiredArgsConstructor
 public class AuthApi {
 
-    private final UserDao userDao;
+    private final AuthService authService;
 
     @PostMapping("/signup")
-    public Long signup(@RequestBody SignUpRequest request){
-        User user = User.builder()
-                        .email(request.getEmail())
-                                .password(request.getPassword())
-                                        .build();
-        userDao.save(user);
-        return user.getId();
+    public ResponseEntity signup(@RequestBody SignUpRequest request){
+
+        authService.signup(request);
+
+        return ResponseEntity.ok().build();
     }
 
     @PostMapping("/login")
     public ResponseEntity login(@RequestBody LoginRequest request){
-        User user = userDao.findByEmailAndPassword(request.getEmail(), request.getPassword())
-                .orElseThrow(() -> new IllegalArgumentException());
-        return ResponseEntity.ok(user.getId());
+
+        authService.login(request);
+
+        return ResponseEntity.ok().build();
     }
 }

@@ -4,7 +4,7 @@ spring:
       hotel
   datasource:
     driver-class-name: org.mariadb.jdbc.Driver
-    url: jdbc:mariadb://localhost:3306/orders?serverTimezone=Asia/Seoul&characterEncoding=UTF-8&createDatabaseIfNotExist=true
+    url: jdbc:mariadb://172.17.0.2:3306/orders?serverTimezone=Asia/Seoul&characterEncoding=UTF-8&createDatabaseIfNotExist=true
     username: root
     password: root
   jpa:
