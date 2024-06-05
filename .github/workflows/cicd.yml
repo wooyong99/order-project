@@ -72,6 +72,7 @@ jobs:
         key: ${{ secrets.EC2_SSH_PRIVATE_KEY }}
         port: 22
         script: |
-          cd /home/ubuntu/deploy
-          sudo chmod +x ./deploy.sh
-          ./deploy.sh
+          sudo docker pull ${{ secrets.DOCKER_USERNAME }}/order-project:latest
+          sudo docker stop ${docker ps -a -q}
+          sudo docker run -d -p 8080:8080 --n order-project ${{ secrets.DOCKER_USERNAME }}/order-project
+          sudo docker image prune -a -f
