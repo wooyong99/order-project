@@ -55,7 +55,7 @@ jobs:
         file: ./Dockerfile
         push: true
         tags: |
-          ${{ secrets.DOCKER_USER }}/order-project:latest
+          ${{ secrets.DOCKER_USERNAME }}/order-project:latest
 
     - name: Docker build
       run: |
