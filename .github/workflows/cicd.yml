@@ -70,6 +70,7 @@ jobs:
         host: ${{ secrets.HOST }}
         username: ec2-user
         key: ${{ secrets.EC2_SSH_PRIVATE_KEY }}
+        port: 22
         script: |
           cd /home/ubuntu/deploy
           ./deploy.sh
