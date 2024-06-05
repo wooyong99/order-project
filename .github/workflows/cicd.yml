@@ -73,6 +73,6 @@ jobs:
         port: 22
         script: |
           docker pull ${{ secrets.DOCKER_USERNAME }}/order-project:latest
-          docker stop $(docker ps -a -q)
+          docker rm -f $(docker ps -a -q)
           docker run -d -p 8080:8080 --name order-project ${{ secrets.DOCKER_USERNAME }}/order-project
           docker image prune -a -f
