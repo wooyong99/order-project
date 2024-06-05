@@ -64,16 +64,12 @@ jobs:
         docker tag app ${{ secrets.DOCKER_USERNAME }}/order-project:latest
         docker push ${{ secrets.DOCKER_USERNAME }}/order-project:latest
 
-    - name: Deploy
+    - name: Deploy to Server
       uses: appleboy/ssh-action@master
       with:
-        host: ${{ secrets.HOST }} # EC2 인스턴스 퍼블릭 DNS
+        host: ${{ secrets.HOST }}
         username: ec2-user
-        key: ${{ secrets.PRIVATE_KEY }} # pem 키
-        # 도커 작업
+        key: ${{ secrets.EC2_SSH_PRIVATE_KEY }}
         script: |
-          docker pull ${{ secrets.DOCKER_USERNAME }}/order-project:latest
-          docker stop $(docker ps -a -q)
-          docker run -d --log-driver=syslog -p 8080:8080 ${{ secrets.DOCKER_USERNAME }}/order-project:latest
-          docker rm $(docker ps --filter 'status=exited' -a -q)
-          docker image prune -a -f
+          cd /home/ubuntu/deploy
+          ./deploy.sh
