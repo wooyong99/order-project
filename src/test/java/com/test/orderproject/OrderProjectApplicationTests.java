@@ -10,6 +10,7 @@ class OrderProjectApplicationTests {
     void contextLoads() {
         System.out.println("test");
         System.out.println("test");
+        System.out.println("test");
     }
 
 }
